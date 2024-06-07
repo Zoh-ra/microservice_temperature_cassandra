@@ -20,7 +20,7 @@ public class SondeUn {
     private LocalDateTime date;
     private Double temperature;
     private Double tensionBatterie;
-    private Integer rssi;
+    private Double rssi;
     private String concentrateur;
     private LocalDateTime heureReception;
     private Boolean archivage;
