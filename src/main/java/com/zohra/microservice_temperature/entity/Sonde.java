@@ -11,12 +11,13 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "210100B")
-public class SondeDeux {
+@Table(name = "Sonde")
+public class Sonde {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String sonde;
     private LocalDateTime date;
     private Double temperature;
     private Double tensionBatterie;

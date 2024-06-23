@@ -1,8 +1,9 @@
 package com.zohra.microservice_temperature.service;
 
-import com.zohra.microservice_temperature.entity.SondeUn;
+import com.zohra.microservice_temperature.entity.Sonde;
 
-import com.zohra.microservice_temperature.repository.SondeUnRepository;
+import com.zohra.microservice_temperature.projection.TemperatureProjection;
+import com.zohra.microservice_temperature.repository.SondeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,29 +15,10 @@ import java.util.List;
 public class SondeService {
 
     @Autowired
-    private SondeUnRepository sondeUnRepository;
+    private SondeRepository sondeRepository;
 
-
-    public List<SondeUn> getTemperaturesByPeriodForSondeUn(LocalDateTime startDate, LocalDateTime endDate) {
-        System.out.println("temperatures: " + startDate + " and " + endDate);
-        List<SondeUn> result = sondeUnRepository.findByDateBetween(startDate, endDate);
-        System.out.println("result: " + result.size());
-        return result;
-    }
-
-    public List<LocalDateTime> getTemperatureGapsForSondeUn(LocalDateTime startDate, LocalDateTime endDate) {
-        List<SondeUn> records = sondeUnRepository.findByDateBetween(startDate, endDate);
-        int intervalleMesure = 10;
-        List<LocalDateTime> gaps = new ArrayList<>();
-
-        for (int i = 1; i < records.size(); i++) {
-            LocalDateTime expectedDate = records.get(i - 1).getDate().plusMinutes(intervalleMesure);
-            if (!records.get(i).getDate().equals(expectedDate)) {
-                gaps.add(expectedDate);
-            }
-        }
-
-        return gaps;
+    public List<TemperatureProjection> getTemperaturesBySondeAndDateRange(String sonde, LocalDateTime startDate, LocalDateTime endDate) {
+        return sondeRepository.findTemperaturesBySondeAndDateBetween(sonde, startDate, endDate);
     }
 }
 

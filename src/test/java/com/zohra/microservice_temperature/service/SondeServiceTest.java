@@ -1,9 +1,8 @@
 package com.zohra.microservice_temperature.service;
 
-import com.zohra.microservice_temperature.entity.SondeDeux;
-import com.zohra.microservice_temperature.entity.SondeUn;
-import com.zohra.microservice_temperature.repository.SondeUnRepository;
-import com.zohra.microservice_temperature.repository.SondeDeuxRepository;
+
+import com.zohra.microservice_temperature.entity.Sonde;
+import com.zohra.microservice_temperature.repository.SondeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
