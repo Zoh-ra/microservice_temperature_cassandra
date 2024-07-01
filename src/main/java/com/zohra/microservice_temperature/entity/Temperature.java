@@ -6,17 +6,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "Sonde")
-public class Sonde {
+@Table(name = "temperature_sonde")
+public class Temperature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String sonde;
     private LocalDateTime date;
     private Double temperature;

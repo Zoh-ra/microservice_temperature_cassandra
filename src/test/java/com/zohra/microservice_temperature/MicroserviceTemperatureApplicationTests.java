@@ -1,20 +1,14 @@
 package com.zohra.microservice_temperature;
 
-import com.zohra.microservice_temperature.entity.Sonde;
-import com.zohra.microservice_temperature.repository.SondeRepository;
-import com.zohra.microservice_temperature.service.SondeService;
+import com.zohra.microservice_temperature.repository.TemperatureRepository;
+import com.zohra.microservice_temperature.service.TemperatureService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class MicroserviceTemperatureApplicationTests {
@@ -24,10 +18,10 @@ class MicroserviceTemperatureApplicationTests {
 	}
 
 	@Mock
-	private SondeRepository sondeRepository;
+	private TemperatureRepository sondeRepository;
 
 	@InjectMocks
-	private SondeService sondeService;
+	private TemperatureService sondeService;
 
 	@Test
 	public void testGetTemperatureByPeriodForSonde1() {
