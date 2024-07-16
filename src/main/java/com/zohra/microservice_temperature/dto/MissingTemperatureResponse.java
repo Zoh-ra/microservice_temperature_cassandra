@@ -1,38 +1,33 @@
 package com.zohra.microservice_temperature.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zohra.microservice_temperature.entity.Temperature;
+import com.zohra.microservice_temperature.projection.DateProjection;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class MissingTemperatureResponse {
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private List<LocalDateTime> missingDates;
-    private int totalMissing;
+    private List<DateProjection> dataMissingTemperature;
+    private Integer totalMissingTemperature;
 
-    // Constructors, Getters and Setters
+    // Getters and Setters
 
-    public MissingTemperatureResponse() {
+    public List<DateProjection> getDataMissingTemperature() {
+        return dataMissingTemperature;
     }
 
-    public MissingTemperatureResponse(List<LocalDateTime> missingDates, int totalMissing) {
-        this.missingDates = missingDates;
-        this.totalMissing = totalMissing;
+    public void setDataMissingTemperature(List<DateProjection> dataMissingTemperature) {
+        this.dataMissingTemperature = dataMissingTemperature;
     }
 
-    public List<LocalDateTime> getMissingDates() {
-        return missingDates;
+    public Integer getTotalMissingTemperature() {
+        return totalMissingTemperature;
     }
 
-    public void setMissingDates(List<LocalDateTime> missingDates) {
-        this.missingDates = missingDates;
-    }
-
-    public int getTotalMissing() {
-        return totalMissing;
-    }
-
-    public void setTotalMissing(int totalMissing) {
-        this.totalMissing = totalMissing;
+    public void setTotalMissingTemperature(Integer totalMissingTemperature) {
+        this.totalMissingTemperature = totalMissingTemperature;
     }
 }
+

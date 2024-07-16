@@ -36,7 +36,7 @@ public class TemperatureController {
 
             @Parameter(description = "Date de fin au format 'yyyy-MM-ddTHH:mm:ss'")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
-        TemperatureResponse response = temperatureService.getTemperaturesBySondeAndDateRange(sonde, startDate, endDate);
+        TemperatureResponse response = temperatureService.getTemperaturesBySondeAndDatePeriod(sonde, startDate, endDate);
         return ResponseEntity.ok(response);
     }
 
@@ -50,7 +50,7 @@ public class TemperatureController {
 
             @Parameter(description = "Date de fin au format 'yyyy-MM-ddTHH:mm:ss'")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
-        MissingTemperatureResponse missingTemperatures = temperatureService.getMissingTemperatures(sonde, startDate, endDate);
+        MissingTemperatureResponse missingTemperatures = temperatureService.getMissingTemperaturesBySondeAndDatePeriod(sonde, startDate, endDate);
         return ResponseEntity.ok(missingTemperatures);
     }
 }
