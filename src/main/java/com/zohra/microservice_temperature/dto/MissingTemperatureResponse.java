@@ -12,8 +12,6 @@ public class MissingTemperatureResponse {
     private List<DateProjection> dataMissingTemperature;
     private Integer totalMissingTemperature;
 
-    // Getters and Setters
-
     public List<DateProjection> getDataMissingTemperature() {
         return dataMissingTemperature;
     }

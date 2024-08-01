@@ -10,7 +10,6 @@ public class TemperatureProjection {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime date;
 
-    // Default constructor for JPA
     public TemperatureProjection() {
     }
 

@@ -1,24 +1,27 @@
 package com.zohra.microservice_temperature.service;
 
 import com.zohra.microservice_temperature.dto.MissingTemperatureResponse;
+import com.zohra.microservice_temperature.dto.TemperatureResponse;
 import com.zohra.microservice_temperature.entity.Temperature;
 import com.zohra.microservice_temperature.projection.DateProjection;
 import com.zohra.microservice_temperature.projection.TemperatureProjection;
-import com.zohra.microservice_temperature.dto.TemperatureResponse;
 import com.zohra.microservice_temperature.repository.TemperatureRepository;
 import com.zohra.microservice_temperature.utils.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.core.CassandraTemplate;
+import org.springframework.data.cassandra.core.query.Criteria;
+import org.springframework.data.cassandra.core.query.Query;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class TemperatureService {
 
+    @Autowired
+    private CassandraTemplate cassandraTemplate;
     @Autowired
     private TemperatureRepository temperatureRepository;
 
@@ -42,7 +45,11 @@ public class TemperatureService {
                 .sorted()
                 .collect(Collectors.toList());
 
-        List<LocalDateTime> missingDates = DateTimeUtils.findMissingDates(roundedExistingDates, 10);
+        List<LocalDateTime> allDatesInRange = DateTimeUtils.generateDateRange(startDate, endDate, 10);
+
+        List<LocalDateTime> missingDates = allDatesInRange.stream()
+                .filter(date -> !roundedExistingDates.contains(date))
+                .collect(Collectors.toList());
 
         List<DateProjection> missingTemperatures = missingDates.stream()
                 .map(DateProjection::new)

@@ -1,28 +1,97 @@
 package com.zohra.microservice_temperature.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.core.mapping.Table;
+
 import java.time.LocalDateTime;
 
-@Data
-@Entity
-@Table(name = "temperature_sonde")
+@Table("temperature_sonde_periode")
 public class Temperature {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @PrimaryKeyColumn(name = "sonde", type = PrimaryKeyType.PARTITIONED)
     private String sonde;
+
+    @PrimaryKeyColumn(name = "date", type = PrimaryKeyType.CLUSTERED)
     private LocalDateTime date;
-    private Double temperature;
-    private Double tensionBatterie;
-    private Double rssi;
+
+    private double temperature;
+    private boolean Archivage;
     private String concentrateur;
     private LocalDateTime heureReception;
-    private Boolean archivage;
-    private Integer intervalleMesure;
+    private int intervalleMesure;
+    private double rssi;
+    private double tensionBatterie;
 
+    public String getSonde() {
+        return sonde;
+    }
+
+    public void setSonde(String sonde) {
+        this.sonde = sonde;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public boolean isArchivage() {
+        return Archivage;
+    }
+
+    public void setArchivage(boolean Archivage) {
+        this.Archivage = Archivage;
+    }
+
+    public String getConcentrateur() {
+        return concentrateur;
+    }
+
+    public void setConcentrateur(String concentrateur) {
+        this.concentrateur = concentrateur;
+    }
+
+    public LocalDateTime getHeureReception() {
+        return heureReception;
+    }
+
+    public void setHeureReception(LocalDateTime heureReception) {
+        this.heureReception = heureReception;
+    }
+
+    public int getIntervalleMesure() {
+        return intervalleMesure;
+    }
+
+    public void setIntervalleMesure(int intervalleMesure) {
+        this.intervalleMesure = intervalleMesure;
+    }
+
+    public double getRssi() {
+        return rssi;
+    }
+
+    public void setRssi(double rssi) {
+        this.rssi = rssi;
+    }
+
+    public double getTensionBatterie() {
+        return tensionBatterie;
+    }
+
+    public void setTensionBatterie(double tensionBatterie) {
+        this.tensionBatterie = tensionBatterie;
+    }
 }

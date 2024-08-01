@@ -1,5 +1,5 @@
-
 package com.zohra.microservice_temperature.controller;
+
 import com.zohra.microservice_temperature.dto.MissingTemperatureResponse;
 import com.zohra.microservice_temperature.dto.TemperatureResponse;
 import com.zohra.microservice_temperature.service.TemperatureService;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/temperature")
@@ -28,14 +27,12 @@ public class TemperatureController {
     @Operation(summary = "Temperature par periode")
     @GetMapping("/sonde")
     public ResponseEntity<TemperatureResponse> getSondesData(
-
             @RequestParam String sonde,
-
             @Parameter(description = "Date de début au format 'yyyy-MM-ddTHH:mm:ss'")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startDate,
-
             @Parameter(description = "Date de fin au format 'yyyy-MM-ddTHH:mm:ss'")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
+
         TemperatureResponse response = temperatureService.getTemperaturesBySondeAndDatePeriod(sonde, startDate, endDate);
         return ResponseEntity.ok(response);
     }
@@ -44,12 +41,11 @@ public class TemperatureController {
     @GetMapping("/missing")
     public ResponseEntity<MissingTemperatureResponse> getMissingTemperatures(
             @RequestParam String sonde,
-
             @Parameter(description = "Date de début au format 'yyyy-MM-ddTHH:mm:ss'")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startDate,
-
             @Parameter(description = "Date de fin au format 'yyyy-MM-ddTHH:mm:ss'")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endDate) {
+
         MissingTemperatureResponse missingTemperatures = temperatureService.getMissingTemperaturesBySondeAndDatePeriod(sonde, startDate, endDate);
         return ResponseEntity.ok(missingTemperatures);
     }
